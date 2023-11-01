@@ -1,0 +1,7 @@
+To Develop A real-time low cost and efficient air quality monitoring ad prediction system 
+To Effectively Integrate IOT,LPWAN,Fog Computing And Cloud Computing
+To analyse the trends in the air quality data  
+To deploy accurate and fast deep learning models on the fog node
+To issue early warnings before AQI reaches a dangerous threshold to the stakeholders
+To display real time air quality trends and predictions to the end-users.
+
