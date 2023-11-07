@@ -43,7 +43,7 @@ const onRead = () => {
 
     let params = {
       TableName: "aqm-dynamo",
-      ProjectionExpression: "BP, WD, WS, PM10, O3, SR"
+      ProjectionExpression: "BP, WD, WS, PM10, O3, SR, PM25, SO2, NO2, CO"
     };
 
     docClient.scan(params, function(err, data) {
@@ -60,6 +60,11 @@ const onRead = () => {
       const column4Values = data.Items.map(item => item.PM10);
       const column5Values = data.Items.map(item => item.O3);
       const column6Values = data.Items.map(item => item.SR);
+      const column7Values = data.Items.map(item => item.PM25);
+      const column8Values = data.Items.map(item => item.SO2);
+      const column9Values = data.Items.map(item => item.NO2);
+      const column10Values = data.Items.map(item => item.CO);
+
 
       const lastElementArray = [
         column1Values[len - 1],
@@ -67,7 +72,11 @@ const onRead = () => {
         column3Values[len - 1],
         column4Values[len - 1],
         column5Values[len - 1],
-        column6Values[len - 1]
+        column6Values[len - 1],
+        column7Values[len - 1],
+        column8Values[len - 1],
+        column9Values[len - 1],
+        column10Values[len - 1],
       ];
 
       resolve(lastElementArray);
@@ -175,26 +184,55 @@ const UserReports = () => {
           name="WindSpeed"
           value={x[2]}
         />
+        <MiniStatistics
+          startContent={
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+          }
+          name="PM25"
+          value={x[6]}
+        />
+        <MiniStatistics
+          startContent={
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+          }
+          name="SO2"
+          value={x[7]}
+          />
+        <MiniStatistics
+        startContent={
+          <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+        }
+        name="NO2"
+        value={x[8]}
+        />
+        <MiniStatistics
+        startContent={
+          <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+        }
+        name="CO"
+        value={x[9]}
+        />
       </SimpleGrid>
 
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
         <TotalSpent />
-        <WeeklyRevenue />
-      </SimpleGrid>
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
-        <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px">
-          <DailyTraffic />
-          <PieCard />
-          
-         
-        </SimpleGrid>
-        
         <Projects
           
           banner={banner}
           avatar={avatar}
           
         />
+        {/* <WeeklyRevenue /> */}
+      </SimpleGrid>
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
+        <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px">
+          {/* <DailyTraffic /> */}
+          {/* <PieCard /> */}
+          
+         
+        </SimpleGrid>
+        
+        
       </SimpleGrid>
       
     </Box>
