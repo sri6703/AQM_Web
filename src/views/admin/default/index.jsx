@@ -43,7 +43,7 @@ const onRead = () => {
 
     let params = {
       TableName: "aqm-dynamo",
-      ProjectionExpression: "BP, WD, WS, PM10, O3, SR, PM25, SO2, NO2, CO"
+      ProjectionExpression: "BP, WD, WS, PM10, O3, SR, PM25, SO2, NO2, CO, AQI"
     };
 
     docClient.scan(params, function(err, data) {
@@ -64,6 +64,7 @@ const onRead = () => {
       const column8Values = data.Items.map(item => item.SO2);
       const column9Values = data.Items.map(item => item.NO2);
       const column10Values = data.Items.map(item => item.CO);
+      const column11Values = data.Items.map(item => item.AQI);
 
 
       const lastElementArray = [
@@ -77,6 +78,7 @@ const onRead = () => {
         column8Values[len - 1],
         column9Values[len - 1],
         column10Values[len - 1],
+        column11Values[len - 1]
       ];
 
       resolve(lastElementArray);
@@ -101,34 +103,7 @@ const UserReports = () => {
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
-  const handleCardClick1 = () => {
-    // Logic to handle the click event on the card
-    // Load another component or perform any desired action
-  };
-  const handleCardClick2 = () => {
-    // Logic to handle the click event on the card
-    // Load another component or perform any desired action
-  };
-
-  const handleCardClick3 = () => {
-    // Logic to handle the click event on the card
-    // Load another component or perform any desired action
-  };
-
-  const handleCardClick4 = () => {
-    // Logic to handle the click event on the card
-    // Load another component or perform any desired action
-  };
-
-  const handleCardClick5 = () => {
-    // Logic to handle the click event on the card
-    // Load another component or perform any desired action
-  };
-
-  const handleCardClick6 = () => {
-    // Logic to handle the click event on the card
-    // Load another component or perform any desired action
-  };
+  
 
 
   if (x === null) {
@@ -140,7 +115,7 @@ const UserReports = () => {
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }} gap="20px" mb="20px">
         <MiniStatistics
           startContent={
-            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={MdCompress} color={brandColor} onClick={handleCardClick2} />} />
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={MdCompress} color={brandColor}  />} />
           }
           name="Pressure"
           value={x[0]}
@@ -148,18 +123,18 @@ const UserReports = () => {
      
         <MiniStatistics
           startContent={
-            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={HiPaperAirplane} color={brandColor} onClick={handleCardClick2} />} />
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={HiPaperAirplane} color={brandColor}  />} />
           }
           name="Wind Direction"
           value={x[1]}
         />
         <MiniStatistics startContent={
-            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor}  />} />
           }
           name="PM10" value={x[3]} />
         <MiniStatistics
           startContent={
-            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiEarthAmerica} color={brandColor} onClick={handleCardClick4} />} />
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiEarthAmerica} color={brandColor}  />} />
           }
           
           name="Ozone"
@@ -171,7 +146,7 @@ const UserReports = () => {
               w="56px"
               h="56px"
               bg={boxBg}
-              icon={<Icon w="32px" h="32px"  as={BsFillSunFill} color={brandColor}  onClick={handleCardClick5}/>}
+              icon={<Icon w="32px" h="32px"  as={BsFillSunFill} color={brandColor} />}
             />
           }
           name="Solar Radiation"
@@ -179,35 +154,35 @@ const UserReports = () => {
         />
         <MiniStatistics
           startContent={
-            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={BsWind} color={brandColor} onClick={handleCardClick6} />} />
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={BsWind} color={brandColor} />} />
           }
           name="WindSpeed"
           value={x[2]}
         />
         <MiniStatistics
           startContent={
-            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor}  />} />
           }
           name="PM25"
           value={x[6]}
         />
         <MiniStatistics
           startContent={
-            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+            <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor}  />} />
           }
           name="SO2"
           value={x[7]}
           />
         <MiniStatistics
         startContent={
-          <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+          <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor}/>} />
         }
         name="NO2"
         value={x[8]}
         />
         <MiniStatistics
         startContent={
-          <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} onClick={handleCardClick3} />} />
+          <IconBox w="56px" h="56px" bg={boxBg} icon={<Icon w="32px" h="32px" as={GiChemicalDrop} color={brandColor} />} />
         }
         name="CO"
         value={x[9]}
