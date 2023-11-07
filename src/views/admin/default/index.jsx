@@ -87,6 +87,22 @@ const onRead = () => {
 };
 
 const UserReports = () => {
+  const handleReload = () => {
+    // Fetch new data and update the state
+    // You can make an API request or update the 'x' state in another way
+    // For this example, we'll just simulate updating the data after a delay
+    setTimeout(() => {
+      onRead()
+        .then(lastElementArray => {
+          console.log(lastElementArray);
+          setX(lastElementArray); // Assign the last element array to x here
+        })
+        .catch(error => {
+          console.log(error); // Handle any error that occurred during the retrieval
+        });
+    }, 1000); // Simulated delay (1 second)
+  };
+  
   const [x, setX] = useState(null);
 
   useEffect(() => {
@@ -109,9 +125,10 @@ const UserReports = () => {
   if (x === null) {
     return <div>Loading...</div>; // Render a loading state until x has a valid value
   }
-
+  
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+      <button onClick={handleReload}>Reload</button>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }} gap="20px" mb="20px">
         <MiniStatistics
           startContent={
