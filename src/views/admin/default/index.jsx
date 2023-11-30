@@ -102,7 +102,7 @@ const UserReports = () => {
         });
     }, 1000); // Simulated delay (1 second)
   };
-  
+
   const [x, setX] = useState(null);
 
   useEffect(() => {
@@ -128,7 +128,7 @@ const UserReports = () => {
   
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <button onClick={handleReload}>Reload</button>
+      <button onClick={handleReload}><img src="" alt="Reload" /></button>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }} gap="20px" mb="20px">
         <MiniStatistics
           startContent={
